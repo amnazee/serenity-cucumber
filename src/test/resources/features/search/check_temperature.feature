@@ -6,4 +6,9 @@ Feature: Check the temperature
   Scenario: Checking the temperature
     Given Max is at Weather Shopper website
     When Max sees the temperature displayed
-    Then Max decides what category to choose
+    Then Max decides what category to choose as he sees temperature
+
+#Examples:
+#    | temperature |
+#    | below 19    |
+#    | above 34    |
