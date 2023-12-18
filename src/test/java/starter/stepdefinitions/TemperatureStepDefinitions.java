@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import starter.checktemperature.LookAtTemperature;
 import starter.checktemperature.TemperatureChecker;
+import starter.moisturizers.GetTitle;
 import starter.navigation.NavigateTo;
 
 public class TemperatureStepDefinitions {

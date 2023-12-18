@@ -5,7 +5,6 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.questions.Text;
-
 import static starter.checktemperature.TemperatureIcon.TEMPERATURE_ICON;
 
 public class LookAtTemperature implements Question<String> {
@@ -18,9 +17,8 @@ public class LookAtTemperature implements Question<String> {
         );
     }
     public static Question<String> temperatureValue() {
-        return actor -> {return
+        return actor ->
             Text.of(TEMPERATURE_ICON).answeredBy(actor);
-        };
     }
     @Override
     public String answeredBy(Actor actor) {

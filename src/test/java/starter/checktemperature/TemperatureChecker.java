@@ -5,8 +5,7 @@ import net.serenitybdd.screenplay.Actor;
 import org.hamcrest.MatcherAssert;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThan;
-import static starter.checktemperature.HomePageButtons.openMoisturizerPage;
-import static starter.checktemperature.HomePageButtons.openSunscreenPage;
+import static starter.checktemperature.HomePageButtons.*;
 
 public class TemperatureChecker {
     public static void checkTemperature(Actor actor) {
@@ -17,11 +16,11 @@ public class TemperatureChecker {
                 int temperatureValue = Integer.parseInt(numericPart);
                 if(temperatureValue<19){
                     MatcherAssert.assertThat(temperatureValue,lessThan(19));
-                    openMoisturizerPage.click();
+                    MOISTURIZER_BUTTON.click();
                 }
                 else if(temperatureValue>34){
                     MatcherAssert.assertThat(temperatureValue,greaterThan(34));
-                    openSunscreenPage.click();
+                    SUNSCREEN_BUTTON.click();
                 }
                 else {
                     Assert.fail("Unsupported temperature condition");
@@ -33,4 +32,5 @@ public class TemperatureChecker {
             Assert.fail("Failed to parse temperature as a numeric value");
         }
     }
+
 }
