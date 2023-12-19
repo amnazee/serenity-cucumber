@@ -5,12 +5,15 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.waits.Wait;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import starter.cart.CartPage;
 import starter.moisturizers.GetTitle;
 import starter.moisturizers.SelectMoisturizerTask;
 
+import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 import static starter.moisturizers.MoisturizerPage.*;
 
@@ -21,14 +24,18 @@ public class MoisturizerStepDefinition {
                 GetTitle.getTitle(expectedTitle1, expectedTitle2)
         );
     }
-    @When("{actor} adds the least expensive product to the cart")
-    public void theUserAddsTheLeastExpensiveProductToTheCart(Actor actor) {
-        actor.attemptsTo(
+    @When("adds the least expensive product to the cart")
+    public void theUserAddsTheLeastExpensiveProductToTheCart() {
+        theActorInTheSpotlight().attemptsTo(
                 WaitUntil.the(MOISTURIZER_PRODUCTS, isVisible()).forNoMoreThan(10).seconds(),
                 SelectMoisturizerTask.addMoisturizerToCart()
         );
     }
-    @Then("{actor} clicks on the cart to complete the purchase")
-    public void theUserClicksOnTheCartToCompleteThePurchase(Actor actor) {
+    @Then("clicks on the cart to complete the purchase")
+    public void theUserClicksOnTheCartToCompleteThePurchase() throws InterruptedException {
+        Thread.sleep(5000);
+        theActorInTheSpotlight().attemptsTo(
+                Click.on(CART_BUTTON)
+        );
     }
 }
