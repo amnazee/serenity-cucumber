@@ -11,7 +11,9 @@ import net.serenitybdd.screenplay.waits.WaitUntil;
 import starter.cart.CartPage;
 import starter.moisturizers.GetTitle;
 import starter.moisturizers.SelectMoisturizerTask;
+import starter.sunscreens.SelectSunscreenTask;
 
+import static net.serenitybdd.screenplay.actors.OnStage.theActor;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
@@ -26,10 +28,29 @@ public class MoisturizerStepDefinition {
     }
     @When("adds the least expensive product to the cart")
     public void theUserAddsTheLeastExpensiveProductToTheCart() {
-        theActorInTheSpotlight().attemptsTo(
+//        theActorInTheSpotlight().attemptsTo(
+//                WaitUntil.the(MOISTURIZER_PRODUCTS, isVisible()).forNoMoreThan(10).seconds(),
+//                SelectMoisturizerTask.addMoisturizerToCart(),
+//                SelectSunscreenTask.addSunscreenToCart()
+//        );
+
+        String productType=TITLE.resolveFor(theActorInTheSpotlight()).getText();
+        if(productType.equals("Moisturizers")){
+            theActorInTheSpotlight().attemptsTo(
                 WaitUntil.the(MOISTURIZER_PRODUCTS, isVisible()).forNoMoreThan(10).seconds(),
                 SelectMoisturizerTask.addMoisturizerToCart()
-        );
+            );
+        }
+        else if(productType.equals("Sunscreens")){
+//            System.out.println("Sunscreens");
+            theActorInTheSpotlight().attemptsTo(
+                    WaitUntil.the(MOISTURIZER_PRODUCTS, isVisible()).forNoMoreThan(10).seconds(),
+                    SelectSunscreenTask.addSunscreenToCart()
+            );
+        }
+        else{
+            System.out.println("Invalid Product Type");
+        }
     }
     @Then("clicks on the cart to complete the purchase")
     public void theUserClicksOnTheCartToCompleteThePurchase() throws InterruptedException {
