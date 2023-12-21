@@ -11,4 +11,9 @@ Feature: Check the temperature
 
     Given Max is at Product Page and the title is "Moisturizers" or "Sunscreens"
     When adds the least expensive product to the cart
-    Then clicks on the cart to complete the purchase
+    And click on the cart button
+    Then check if the items in the cart are right products
+
+    Given at the Payment Page
+    When enters the payment details into the form
+    Then payment is successful

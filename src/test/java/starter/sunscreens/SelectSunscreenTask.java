@@ -15,7 +15,7 @@ import static starter.moisturizers.MoisturizerPage.MOISTURIZER_PRODUCTS;
 public class SelectSunscreenTask implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
-            BrowseTheWeb.as(actor).evaluateJavascript("window.scrollTo(0, document.body.scrollHeight)");
+//            BrowseTheWeb.as(actor).evaluateJavascript("window.scrollTo(0, document.body.scrollHeight)");
             List<WebElementFacade> products = BrowseTheWeb.as(actor).findAll(MOISTURIZER_PRODUCTS);
             String firstElementPrice = products.get(0).findElements(By.xpath("*")).get(2).getText();
             int minElementPrice = Integer.parseInt(firstElementPrice.substring(firstElementPrice.length() - 3));
