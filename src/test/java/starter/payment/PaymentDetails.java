@@ -1,18 +1,31 @@
 package starter.payment;
 
+import net.serenitybdd.core.Serenity;
+import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.SendKeys;
+import net.serenitybdd.screenplay.waits.WaitUntil;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import starter.moisturizers.SelectMoisturizerTask;
+
+import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static starter.payment.PaymentPage.*;
 
-public class PaymentDetails {
-    public static Performable addDetails() {
-        return Task.where("{0} enter the card details",
-                Enter.keyValues("amna@gmail.com").into(EMAIL),
-                Enter.theValue("4000056655665556").into(CARD_NUMBER),
-                Enter.theValue("02/24").into(DATE),
-                Enter.keyValues("333").into(CVC)
-        );
+public class PaymentDetails implements Task{
+    @Override
+    public <T extends Actor> void performAs(T t) {
+        WebDriver driver = Serenity.getWebdriverManager().getCurrentDriver();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.getElementById('email').value='amna@gmail.com';");
+        js.executeScript("document.getElementById('card_number').value='4242424242424242';");
+        js.executeScript("document.getElementById('cc-exp').value='04/24';");
+        js.executeScript("document.getElementById('cc-csc').value='333';");
+    }
+
+    public static PaymentDetails paymentDetails() {
+        return instrumented(PaymentDetails.class);
     }
 }

@@ -13,6 +13,4 @@ public class CartPage extends PageObject {
     public static final Target PAY_BUTTON=Target.the("Pay Button").locatedBy("//button[@class='stripe-button-el']");
     public static final Target ITEMS= Target.the("Items").locatedBy("//tbody//tr//td");
     public static final Target TOTAL=Target.the("Total Price").locatedBy("//p[@id='total']");
-
-
 }
