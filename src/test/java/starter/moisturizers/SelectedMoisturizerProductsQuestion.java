@@ -2,20 +2,25 @@ package starter.moisturizers;
 
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.HashMap;
 import java.util.List;
-import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static starter.moisturizers.MoisturizerPage.*;
+import java.util.Map;
 
-public class SelectMoisturizerTask implements Task {
+import static starter.moisturizers.MoisturizerPage.MOISTURIZER_PRODUCTS;
+
+public class SelectedMoisturizerProductsQuestion  implements Question<Map<String, Map<String, String>>> {
     @Override
-    public <T extends Actor> void performAs(T actor) {
+    public Map<String, Map<String, String>> answeredBy(Actor actor) {
         BrowseTheWeb.as(actor).evaluateJavascript("window.scrollTo(0, document.body.scrollHeight)");
         List<WebElementFacade> products = BrowseTheWeb.as(actor).findAll(MOISTURIZER_PRODUCTS);
+        Map<String, Map<String, String>> selectedProducts = new HashMap<>();
+        Map<String, String> minAlmondProducts = new HashMap<>();
+        Map<String, String> minAloeProducts = new HashMap<>();
         String firstElementPrice = products.get(0).findElements(By.xpath("*")).get(2).getText();
         int minElementPrice = Integer.parseInt(firstElementPrice.substring(firstElementPrice.length() - 3));
         int minAlmondPrice = Integer.MAX_VALUE;
@@ -29,9 +34,6 @@ public class SelectMoisturizerTask implements Task {
                 List<WebElement> listElements = products.get(i).findElements(By.xpath("*"));
                 int price = Integer.parseInt(listElements.get(2).getText().substring(listElements.get(2).getText().length() - 3));
                 String productName = listElements.get(1).getText();
-//                String priceText = products.get(i).findBy(PRODUCT_PRICE).getText();
-//                int price = Integer.parseInt(priceText.substring(priceText.length() - 3));
-//                String productName = products.get(i).findBy(PRODUCT_NAME).getText(); // Assuming a target for product name
 
                 //this is for myself to print each of the product along with their prices
                 System.out.println("Product Name: " + productName);
@@ -42,6 +44,8 @@ public class SelectMoisturizerTask implements Task {
                     if (price <= minAlmondPrice) {
                         minAlmondIndex = i;
                         minAlmondPrice = price;
+                        minAlmondProducts.put("ProductName", productName);
+                        minAlmondProducts.put("Price", String.valueOf(price));
                     }
                 }
                 //finds the products which contains aloe and then compares prices
@@ -49,26 +53,20 @@ public class SelectMoisturizerTask implements Task {
                     if (price <= minAloePrice) {
                         minAloeIndex = i;
                         minAloePrice = price;
+                        minAloeProducts.put("ProductName", productName);
+                        minAloeProducts.put("Price", String.valueOf(price));
                     }
                 }
             }
         }
         if (minAlmondIndex > -1) {
-//            products.get(minAlmondIndex).find(ADD_TO_CART_BUTTON).click();
             products.get(minAlmondIndex).findElements(By.xpath("*")).get(3).click();
         }
         if (minAloeIndex > -1) {
-//            products.get(minAloeIndex).find(ADD_TO_CART_BUTTON).click();
             products.get(minAloeIndex).findElements(By.xpath("*")).get(3).click();
-
         }
-        //this is for myself only to see if the products are chosen correctly
-        System.out.println("Min Almond Price: " + minAlmondPrice);
-        System.out.println("Min Almond Index: " + minAlmondIndex);
-        System.out.println("Min Aloe Price: " + minAloePrice);
-        System.out.println("Min Aloe Index: " + minAloeIndex);
-}
-    public static SelectMoisturizerTask addMoisturizerToCart() {
-        return instrumented(SelectMoisturizerTask.class);
+        selectedProducts.put("almond", minAlmondProducts);
+        selectedProducts.put("aloe", minAloeProducts);
+        return selectedProducts;
     }
 }

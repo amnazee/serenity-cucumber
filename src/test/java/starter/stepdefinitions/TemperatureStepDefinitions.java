@@ -18,7 +18,8 @@ public class TemperatureStepDefinitions {
 
     @When("{actor} sees the temperature displayed")
     public void max_sees_the_temperature_displayed(Actor actor) {
-        actor.attemptsTo(LookAtTemperature.getTemperatureValue());
+        actor.attemptsTo(LookAtTemperature.getTemperatureValue()
+        );
     }
 
     @Then("{actor} decides what category to choose as he sees temperature")

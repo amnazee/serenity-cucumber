@@ -8,7 +8,6 @@ Feature: Check the temperature
     When Max sees the temperature displayed
     Then Max decides what category to choose as he sees temperature
 
-
     Given Max is at Product Page and the title is "Moisturizers" or "Sunscreens"
     When adds the least expensive product to the cart
     And click on the cart button

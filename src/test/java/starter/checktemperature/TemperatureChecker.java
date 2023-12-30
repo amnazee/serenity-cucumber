@@ -15,11 +15,9 @@ public class TemperatureChecker {
             if (!numericPart.isEmpty()) {
                 int temperatureValue = Integer.parseInt(numericPart);
                 if(temperatureValue<19){
-                    MatcherAssert.assertThat(temperatureValue,lessThan(19));
                     MOISTURIZER_BUTTON.click();
                 }
                 else if(temperatureValue>34){
-                    MatcherAssert.assertThat(temperatureValue,greaterThan(34));
                     SUNSCREEN_BUTTON.click();
                 }
                 else {
