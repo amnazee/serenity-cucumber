@@ -2,17 +2,10 @@ package starter.payment;
 
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.actions.Enter;
-import net.serenitybdd.screenplay.actions.SendKeys;
-import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import starter.moisturizers.SelectMoisturizerTask;
-
 import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static starter.payment.PaymentPage.*;
 
 public class PaymentDetails implements Task{
     @Override

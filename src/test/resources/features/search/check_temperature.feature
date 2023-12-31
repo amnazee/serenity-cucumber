@@ -13,6 +13,13 @@ Feature: Check the temperature
     And click on the cart button
     Then check if the items in the cart are right products
 
+#    Given at the Payment Page
+#    When enters the payment details into the form
+#    Then payment is successful
     Given at the Payment Page
     When enters the payment details into the form
+      | Email                | amnazeeshan@gmail.com  |
+      | Card Number          | 4242 4242 4242 4242    |
+      | Expiration Date      | 05/25                  |
+      | CVC                  | 123                    |
     Then payment is successful

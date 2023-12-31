@@ -6,7 +6,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actions.Click;
-import org.hamcrest.Matchers;
 import starter.cart.NoOfItems;
 import starter.cart.RetrieveCartItems;
 import starter.moisturizers.GetTitle;
@@ -55,7 +54,6 @@ public class MoisturizerStepDefinition {
             System.out.println("Invalid Product Type");
             return;
         }
-
         for (Map.Entry<String, Map<String, String>> entry : selectedProducts.entrySet()) {
             String productName = entry.getValue().get("ProductName");
             String productPrice = entry.getValue().get("Price");
