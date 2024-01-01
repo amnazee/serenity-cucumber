@@ -70,14 +70,8 @@ public class MoisturizerStepDefinition {
     }
     @Then("check if the items in the cart are right products")
     public void checkIfTheItemsInTheCartAreRightProducts() throws InterruptedException {
-//        Thread.sleep(5000);
-//        theActorInTheSpotlight().attemptsTo(
-//                GetCartData.cartData(),
-//                Click.on(PAY_BUTTON)
-//        );
         Map<String, String> cartItems = theActorInTheSpotlight().asksFor(new RetrieveCartItems());
         System.out.println(cartItems);
-//        assertThat(cartItems).isEqualTo(selectedProductMap.entrySet());
         assertThat(cartItems.keySet()).isEqualTo(selectedProductMap.keySet());
         theActorInTheSpotlight().attemptsTo(
                 Click.on(PAY_BUTTON)

@@ -23,9 +23,7 @@ public class PaymentStepDefinitions {
     }
     @When("enters the payment details into the form")
     public void entersThePaymentDetailsIntoTheForm(Map<String, String> paymentDetails) {
-//                PaymentDetails.paymentDetails(),
             theActorInTheSpotlight().attemptsTo(new PaymentScreenplayTask(paymentDetails)
-//        WaitForHiddenFieldToAppear.waitUntilHiddenFieldAppears().then(Click.on(SUBMIT_BUTTON))
         );
     }
     @Then("payment is successful")
