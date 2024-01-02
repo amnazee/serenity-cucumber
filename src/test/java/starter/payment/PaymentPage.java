@@ -16,6 +16,7 @@ public class PaymentPage extends PageObject {
     public static Target PAYMENT_HEADING=Target.the("payment heading").locatedBy("//h1[contains(.,'Stripe')]");
     public static Target SUBMIT_BUTTON=Target.the("submit").locatedBy("//span[@class='iconTick']");
     public static Target IFRAME=Target.the("Iframe").locatedBy("//iframe[@name='stripe_checkout_app']");
+//    public static final By PAYMENT_SUCCESS = By.xpath("//h2[contains(.,'SUCCESS')]");
 
 
 }

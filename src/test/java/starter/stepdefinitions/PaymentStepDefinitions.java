@@ -4,15 +4,21 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.actions.*;
+import net.serenitybdd.screenplay.waits.Wait;
+import net.serenitybdd.screenplay.waits.WaitUntil;
+import org.awaitility.Awaitility;
 import starter.payment.Confirmation;
-import starter.payment.PaymentDetails;
+import starter.payment.PaymentPage;
 import starter.payment.PaymentScreenplayTask;
-import starter.payment.WaitForHiddenFieldToAppear;
 
+import java.time.Duration;
 import java.util.Map;
 
+import static java.security.AccessController.getContext;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static starter.payment.PaymentPage.*;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
+import static net.serenitybdd.screenplay.waits.WaitUntil.the;
+import static starter.payment.PaymentPage.PAYMENT_SUCCESS;
 
 public class PaymentStepDefinitions {
     @Given("at the Payment Page")
@@ -27,10 +33,11 @@ public class PaymentStepDefinitions {
         );
     }
     @Then("payment is successful")
-    public void paymentIsSuccessful() throws InterruptedException {
-        Thread.sleep(2000);
+    public void paymentIsSuccessful() {
         theActorInTheSpotlight().attemptsTo(
                 Switch.toDefaultContext(),
+                WaitUntil.the(PAYMENT_SUCCESS, isVisible()).forNoMoreThan(10).seconds(),
                 Confirmation.confirmation()
         );
-}}
+    }
+}

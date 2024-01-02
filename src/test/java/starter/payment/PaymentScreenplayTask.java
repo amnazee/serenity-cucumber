@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class PaymentScreenplayTask implements Task {
     private final Map<String, String> paymentDetails;
-
     public PaymentScreenplayTask(Map<String, String> paymentDetails) {
         this.paymentDetails = paymentDetails;
     }

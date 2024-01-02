@@ -30,22 +30,6 @@ public class MoisturizerStepDefinition {
     @When("adds the least expensive product to the cart")
     public void theUserAddsTheLeastExpensiveProductToTheCart(){
         String productType=TITLE.resolveFor(theActorInTheSpotlight()).getText();
-//        if(productType.equals("Sunscreens")){
-//            theActorInTheSpotlight().attemptsTo(
-//                WaitUntil.the(MOISTURIZER_PRODUCTS, isVisible()).forNoMoreThan(10).seconds(),
-//                    SelectSunscreenTask.addSunscreenToCart()
-//            );
-//        }
-//        else if(productType.equals("Moisturizers")){
-//            theActorInTheSpotlight().attemptsTo(
-//                    WaitUntil.the(MOISTURIZER_PRODUCTS, isVisible()).forNoMoreThan(10).seconds(),
-//                    SelectMoisturizerTask.addMoisturizerToCart()
-//            );
-//        }
-//        else{
-//            System.out.println("Invalid Product Type");
-//        }
-
         if (productType.equals("Sunscreens")) {
             selectedProducts=theActorInTheSpotlight().asksFor(new SelectedSunscreenProductsQuestion());
         } else if (productType.equals("Moisturizers")) {
@@ -54,22 +38,23 @@ public class MoisturizerStepDefinition {
             System.out.println("Invalid Product Type");
             return;
         }
+        System.out.println(selectedProducts);
         for (Map.Entry<String, Map<String, String>> entry : selectedProducts.entrySet()) {
             String productName = entry.getValue().get("ProductName");
             String productPrice = entry.getValue().get("Price");
             selectedProductMap.put(productName, productPrice);
+            System.out.println(selectedProductMap);
         }
     }
     @And("click on the cart button")
-    public void clickOnTheCartButton() throws InterruptedException {
-        Thread.sleep(5000);
+    public void clickOnTheCartButton() {
         theActorInTheSpotlight().attemptsTo(
                 NoOfItems.noOfItems(),
                 Click.on(CART_BUTTON)
         );
     }
     @Then("check if the items in the cart are right products")
-    public void checkIfTheItemsInTheCartAreRightProducts() throws InterruptedException {
+    public void checkIfTheItemsInTheCartAreRightProducts() {
         Map<String, String> cartItems = theActorInTheSpotlight().asksFor(new RetrieveCartItems());
         System.out.println(cartItems);
         assertThat(cartItems.keySet()).isEqualTo(selectedProductMap.keySet());

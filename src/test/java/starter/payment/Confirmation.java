@@ -3,6 +3,7 @@ package starter.payment;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
