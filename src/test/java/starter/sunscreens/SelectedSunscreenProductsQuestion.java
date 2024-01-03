@@ -21,10 +21,8 @@ public class SelectedSunscreenProductsQuestion implements Question<Map<String, M
         Map<String, Map<String, String>> selectedProducts = new HashMap<>();
         Map<String, String> minSPF50Products = new HashMap<>();
         Map<String, String> minSPF30Products = new HashMap<>();
-        String firstElementPrice = products.get(0).findElements(By.xpath("*")).get(2).getText();
-        int minElementPrice = Integer.parseInt(firstElementPrice.substring(firstElementPrice.length() - 3));
-        int minSPF50Price = minElementPrice;
-        int minSPF30Price = minElementPrice;
+        int minSPF50Price = Integer.MAX_VALUE;
+        int minSPF30Price = Integer.MAX_VALUE;
         int minSPF50Index = -1;
         int minSPF30Index = -1;
         //to check how many products are found in the list

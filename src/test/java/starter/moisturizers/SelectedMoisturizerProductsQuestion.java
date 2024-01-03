@@ -21,8 +21,6 @@ public class SelectedMoisturizerProductsQuestion  implements Question<Map<String
         Map<String, Map<String, String>> selectedProducts = new HashMap<>();
         Map<String, String> minAlmondProducts = new HashMap<>();
         Map<String, String> minAloeProducts = new HashMap<>();
-        String firstElementPrice = products.get(0).findElements(By.xpath("*")).get(2).getText();
-        int minElementPrice = Integer.parseInt(firstElementPrice.substring(firstElementPrice.length() - 3));
         int minAlmondPrice = Integer.MAX_VALUE;
         int minAloePrice = Integer.MAX_VALUE;
         int minAlmondIndex = -1;
