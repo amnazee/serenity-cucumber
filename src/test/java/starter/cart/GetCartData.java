@@ -20,12 +20,12 @@ public static Performable cartData() {
                 System.out.println("No of Products: "+cartProductElements.size());
                 int cart_value=cartProductElements.size();
                 Assert.assertEquals(2, cart_value);
-                // +store item names and prices
+                // store item names and prices
                 Map<String, String> itemMap = new HashMap<>();
                 // Iterate through each product element and retrieve name and price
                 for (int i = 0; i < cartProductElements.size(); i++) {
                     WebElementFacade productElement = cartProductElements.get(i);
-                    System.out.println("Row Content: " + productElement.getText());
+//                    System.out.println("Row Content: " + productElement.getText());
 
                     String productNameXpath = String.format("//table//tbody/tr[%d]//td[1]", i + 1);
                     String productPriceXpath = String.format("//table//tbody/tr[%d]//td[2]", i + 1);
@@ -34,7 +34,6 @@ public static Performable cartData() {
                     String productPrice = productElement.findBy(productPriceXpath).getText();
 
                     itemMap.put(productName, productPrice);
-//                  System.out.println("Product Name: " + productName + ", Product Price: " + productPrice);
                 }
                 // Print the retrieved item names and prices for myself to check what products are in the cart
                 System.out.println("Items in the cart: " + itemMap.size());

@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static starter.moisturizers.MoisturizerPage.ADD_TO_CART_BUTTON;
 import static starter.moisturizers.MoisturizerPage.MOISTURIZER_PRODUCTS;
 
 public class SelectedMoisturizerProductsQuestion  implements Question<Map<String, Map<String, String>>> {
@@ -58,9 +59,11 @@ public class SelectedMoisturizerProductsQuestion  implements Question<Map<String
             }
         }
         if (minAlmondIndex > -1) {
+//            products.get(minAlmondIndex).findBy(ADD_TO_CART_BUTTON).click();
             products.get(minAlmondIndex).findElements(By.xpath("*")).get(3).click();
         }
         if (minAloeIndex > -1) {
+//            products.get(minAloeIndex).findBy(ADD_TO_CART_BUTTON).click();
             products.get(minAloeIndex).findElements(By.xpath("*")).get(3).click();
         }
         selectedProducts.put("almond", minAlmondProducts);

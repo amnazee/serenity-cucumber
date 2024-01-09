@@ -1,19 +1,15 @@
 package starter.checktemperature;
 
 import com.ibm.icu.impl.Assert;
-import net.serenitybdd.screenplay.Actor;
-import org.hamcrest.MatcherAssert;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.lessThan;
+import net.serenitybdd.screenplay.actions.Click;
 import static starter.checktemperature.HomePageButtons.*;
 
 public class TemperatureChecker {
-    public static void checkTemperature(Actor actor) {
-        String actualTemperature = LookAtTemperature.temperatureValue().answeredBy(actor);
+    public static void checkTemperature(String tempVal) {
         try {
-            String numericPart = actualTemperature.replaceAll("[^0-9]", "");
-            if (!numericPart.isEmpty()) {
-                int temperatureValue = Integer.parseInt(numericPart);
+            if (!tempVal.isEmpty()) {
+                int temperatureValue = Integer.parseInt(tempVal);
+                System.out.println(temperatureValue);
                 if(temperatureValue<19){
                     MOISTURIZER_BUTTON.click();
                 }
