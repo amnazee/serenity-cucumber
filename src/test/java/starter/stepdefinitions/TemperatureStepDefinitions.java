@@ -23,16 +23,17 @@ public class TemperatureStepDefinitions {
 
     @When("{actor} sees the temperature displayed")
     public void max_sees_the_temperature_displayed(Actor actor) {
-        String temperature= TemperatureIcon.TEMPERATURE_ICON.resolveFor(actor).getText();
-        String numericPart = temperature.replaceAll("[^0-9]", "");
-        System.out.println(numericPart);
+//        String temperature= TemperatureIcon.TEMPERATURE_ICON.resolveFor(actor).getText();
+//        String numericPart = temperature.replaceAll("[^0-9]", "");
+//        System.out.println(numericPart);
+        String numericPart=actor.asksFor(new LookAtTemperature());
         actor.remember("Temperature", numericPart);
     }
 
     @Then("{actor} decides what category to choose as he sees temperature")
     public void maxDecidesWhatCategoryToChooseAsHeSees(Actor actor) {
         String temperature= actor.recall("Temperature");
-        System.out.println(temperature+ " temperature is ");
+//        System.out.println(temperature+ " temperature is ");
         TemperatureChecker.checkTemperature(temperature);
     }
 }
